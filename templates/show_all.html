@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!--font awoseome-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <title>Flask CRUD Application</title>
+   </head>
+   <body>
+      <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color:#00ff5573;">
+         Student Database System
+      </nav>
+   <div class="container">
+ 
+      {%- for message in get_flashed_messages() %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+         {{ message }}
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+       </div>
+         
+      {%- endfor %}
+		
+      <a href = "{{ url_for('new_student') }}" class="btn btn-dark mb-3" >Add Student
+      </a>
+      <table class="table table-hover text-center">
+         <thead class="table-dark">
+            <tr>
+               <th scope="col">StuID</th>
+               <th scope="col">Name</th>
+               <th scope="col">City</th>
+               <th scope="col">Address</th>
+               <th scope="col">Pin</th>
+               <th scope="col">Action</th>
+            </tr>
+         </thead>
+         
+         <tbody>
+            {% for student in students %}
+               <tr>
+                  <td>{{ student.id }}</td>
+                  <td>{{ student.name }}</td>
+                  <td>{{ student.city }}</td>
+                  <td>{{ student.addr }}</td>
+                  <td>{{ student.pin }}</td>
+                  <td>
+                     <a href= "/update/{{student.id}}" class="link-dark">
+                        <i class="fa-solid fa-pen-to-square  fs-5 me-3 "></i>
+                     </a>
+                     <a href= "{{ url_for('deletestud', id=student.id )}}"  
+                     class="link-dark"  method='post'>
+                       <i class="fa-solid fa-trash fs-5"></i>
+                     </a>
+                  </td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+      
+   
+      
+     
+   
+      
+      
+      <!--JS-->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   </body>
+</html>
